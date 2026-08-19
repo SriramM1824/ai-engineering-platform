@@ -1,10 +1,16 @@
-import os
+import json
+from file_utils import inspect_file
 
 filename = input("Enter the filename: ")
 
-if os.path.exists(filename):
-    print("File exists.")
-    extension = os.path.splitext(filename)[1]
-    print(f"File extension: {extension}")
-else:
-    print("File does not exist.")
+metadata = inspect_file(filename)
+print(metadata)
+
+with open("data/sample.json", "r") as json_file:
+    data = json.load(json_file)
+
+print(data)
+
+with open("data/output.json", "w") as json_file:
+    json.dump(data, json_file)
+
